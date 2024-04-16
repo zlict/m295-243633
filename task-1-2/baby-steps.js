@@ -6,3 +6,6 @@ for(let i = 2; i <= args.length - 1; i++) {
 }
 
 console.log(sum);
+
+// Alternative:
+// console.log(process.argv.slice(2).reduce((prev, curr) => prev += Number(curr), 0));
