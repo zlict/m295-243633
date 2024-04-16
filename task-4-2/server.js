@@ -18,6 +18,31 @@ const names = [
 app.post('/names', (req, res) => {
   names.push(req.body.name);
   res.send(names)
+});
+
+app.get('/chuck', async (req, res) => {
+  const name = req.query.name;
+
+  const jokeResponse = await fetch('https://api.chucknorris.io/jokes/random');
+  const jokeJson = await jokeResponse.json();
+
+  res.send(jokeJson.value.replace("Chuck Norris", name));
+})
+
+const about = {
+  forename: "Robin",
+  surname: "Bühler",
+  age: 30,
+  place: "Männedorf",
+  eyeColor: "brown"
+}
+
+app.get('/me', (req, res) => {
+  res.send(about);
+});
+
+app.patch('/me', (req, res) => {
+  res.send({...about, ...req.body});
 })
 
 app.listen(port, () => {
